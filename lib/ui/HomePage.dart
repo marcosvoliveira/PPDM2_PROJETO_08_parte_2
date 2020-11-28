@@ -17,28 +17,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _getAllContacts();
-
-/*
-    Contact c = Contact();
-    c.name = "Marcos Vasconcelos";
-    c.email = "email@mail.com";
-    c.phone = "9999 88 77";
-    c.img = "imgTeste";
-    helper.saveContact(c);
-    
-
-    helper.getAllContacts().then((list) {
-      print(list);
-    });
-    */
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contatos"),
-        backgroundColor: Colors.red,
+        title: Text("Contatos Corporativos"),
+        backgroundColor: Colors.purple[500],
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
@@ -47,7 +33,7 @@ class _HomePageState extends State<HomePage> {
           _showContactPage();
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.purple[500],
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(10),
@@ -135,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: Text(
                             "Ligar",
-                            style: TextStyle(color: Colors.red, fontSize: 20),
+                            style: TextStyle(
+                                color: Colors.purple[500], fontSize: 20),
                           ),
                         ),
                       ),
@@ -165,7 +152,8 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: Text(
                             "Excluir",
-                            style: TextStyle(color: Colors.red, fontSize: 20),
+                            style: TextStyle(
+                                color: Colors.purple[500], fontSize: 20),
                           ),
                         ),
                       ),
