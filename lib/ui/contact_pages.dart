@@ -1,6 +1,6 @@
 //import 'dart:html';
 
-import 'package:contactManager/helpers/contact_helper.dart';
+import 'package:contact_manager/helpers/contact_helper.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';

@@ -1,4 +1,4 @@
-//import 'package:contactManager/ui/contact_page.dart';
+//import 'package:contact_manager/ui/contact_page.dart';
 
 import 'package:flutter/material.dart';
 import 'ui/HomePage.dart';
