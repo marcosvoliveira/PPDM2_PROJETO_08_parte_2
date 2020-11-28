@@ -22,6 +22,7 @@ class _ContactPageState extends State<ContactPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _companyController = TextEditingController();
 
   @override
   void initState() {
@@ -35,6 +36,7 @@ class _ContactPageState extends State<ContactPage> {
       _nameController.text = _editedContact.name;
       _emailController.text = _editedContact.email;
       _phoneController.text = _editedContact.phone;
+      _companyController.text = _editedContact.company;
     }
   }
 
@@ -44,7 +46,7 @@ class _ContactPageState extends State<ContactPage> {
       onWillPop: _requestPop,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.purple[500],
           title: Text(_editedContact.name ?? "Novo Contato"),
           centerTitle: true,
         ),
@@ -55,7 +57,7 @@ class _ContactPageState extends State<ContactPage> {
             }
           },
           child: Icon(Icons.save),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.purple[500],
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(10),
@@ -110,6 +112,15 @@ class _ContactPageState extends State<ContactPage> {
                 onChanged: (text) {
                   _userEdited = true;
                   _editedContact.phone = text;
+                },
+                keyboardType: TextInputType.phone,
+              ),
+              TextField(
+                controller: _companyController,
+                decoration: InputDecoration(labelText: "Company"),
+                onChanged: (text) {
+                  _userEdited = true;
+                  _editedContact.company = text;
                 },
                 keyboardType: TextInputType.phone,
               )

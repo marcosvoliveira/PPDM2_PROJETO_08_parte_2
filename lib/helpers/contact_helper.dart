@@ -7,6 +7,7 @@ final String nameColumn = "nameColumn";
 final String emailColumn = "emailColumn";
 final String phoneColumn = "phoneColumn";
 final String imgColumn = "imgColumn";
+final String companyColumn = "companyColumn";
 
 //um objeto para o projeto inteiro = singleton
 class ContactHelper {
@@ -35,7 +36,7 @@ class ContactHelper {
       await db
           .execute("CREATE TABLE $contactTable($idColumn INTEGER PRIMARY KEY,"
               "$nameColumn TEXT, $emailColumn TEXT, "
-              "$phoneColumn TEXT, $imgColumn TEXT) ");
+              "$phoneColumn TEXT, $imgColumn TEXT, $companyColumn TEXT) ");
     });
   }
 
@@ -48,7 +49,14 @@ class ContactHelper {
   Future<Contact> getContact(int id) async {
     Database dbContact = await db;
     List<Map> maps = await dbContact.query(contactTable,
-        columns: [idColumn, nameColumn, emailColumn, phoneColumn, imgColumn],
+        columns: [
+          idColumn,
+          nameColumn,
+          emailColumn,
+          phoneColumn,
+          imgColumn,
+          companyColumn
+        ],
         where: "$idColumn = ?",
         whereArgs: [id]);
     if (maps.length > 0) {
@@ -87,6 +95,17 @@ class ContactHelper {
     return listContact;
   }
 
+  Future<List> getContactsOfCompany(String companyName) async {
+    Database dbContact = await db;
+    List listMap = await dbContact
+        .rawQuery("SELECT * FROM $contactTable WHERE company = $companyName");
+    List<Contact> listContact = List();
+    for (Map m in listMap) {
+      listContact.add(Contact.fromMap(m));
+    }
+    return listContact;
+  }
+
   Future<int> getNumber() async {
     Database dbContact = await db;
     return Sqflite.firstIntValue(
@@ -105,6 +124,7 @@ class Contact {
   String email;
   String phone;
   String img;
+  String company;
 
 //construtor vazio
   Contact();
@@ -116,6 +136,7 @@ class Contact {
     email = map[emailColumn];
     phone = map[phoneColumn];
     img = map[imgColumn];
+    company = map[companyColumn];
   }
   //contato para Mapa
   Map toMap() {
@@ -123,7 +144,8 @@ class Contact {
       nameColumn: name,
       emailColumn: email,
       phoneColumn: phone,
-      imgColumn: img
+      imgColumn: img,
+      companyColumn: company
     };
     if (id != null) {
       map[idColumn] = id;
@@ -133,6 +155,6 @@ class Contact {
 
   @override
   String toString() {
-    return "Contact(id: $id, name: $name, email: $email, phone: $phone, img: $img )";
+    return "Contact(id: $id, name: $name, email: $email, phone: $phone, img: $img, company: $company)";
   }
 }
